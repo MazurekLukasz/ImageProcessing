@@ -1,0 +1,83 @@
+﻿<Window x:Class="ApplicationWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ApplicationWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="600">
+    <Border>
+    <StackPanel>
+            <Grid Width="500" Height="500">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Image Source="{Binding InputImage}"
+               Stretch="Uniform"
+               Margin="5 5 5 5"
+               MaxWidth="400"
+               MaxHeight="400"
+               Grid.Column="0"
+               Grid.Row="0"
+            />
+                <Image Source="{Binding OutputImage}"
+               Stretch="Uniform"
+               Margin="5 5 5 5"
+               MaxWidth="400"
+               MaxHeight="400"
+               Grid.Column="1"
+               Grid.Row="0"
+            />
+
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Button x:Name="OpenImagebtn" 
+                Content="Open Image"
+                Command="{Binding OpenImageCommand}" CommandParameter=""
+                HorizontalAlignment="Center" VerticalAlignment="Top"
+                Width="100" Margin=" 5 5 5 5" Grid.Column="0" />
+                <Button Content="Convert Image"
+                Command="{Binding ConvertImageCommand}" CommandParameter="Elo"
+                HorizontalAlignment="Center" VerticalAlignment="Top"
+                Width="100" Margin=" 5 5 5 5" Grid.Column="1" />
+                <Button Content="Save Image"
+                Command="{Binding SaveImageCommand}" CommandParameter="Elo"
+                HorizontalAlignment="Center" VerticalAlignment="Top"
+                Width="100" Margin=" 5 5 5 5" Grid.Column="2"/>
+                <CheckBox IsChecked="{Binding Path=Asynchronous, Mode=TwoWay}" 
+                      Margin=" 5 5 5 5" Grid.Column="1" Grid.Row="1"
+                          HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    Asynchronous</CheckBox>
+            </Grid>
+            <Label HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom">
+                Conversion Time:</Label>
+            <TextBox Width="200" IsEnabled="False" 
+                 Text="{Binding Mode=OneWay,Path=Time}" 
+                 Height="25" VerticalContentAlignment="Center" 
+                 HorizontalAlignment="Center" 
+                 VerticalAlignment="Center" 
+                 TextAlignment="Center"
+                 Margin=" 5 5 5 5"/>
+
+        </StackPanel>
+    </Border>
+
+
+</Window>
