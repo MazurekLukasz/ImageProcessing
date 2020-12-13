@@ -11,19 +11,31 @@ namespace ApplicationWPF
     {
 
         private Action<object> action;
+        Func<bool> canExecFunc;
 
         public RelayCommand(Action<object> Action)
         {
             this.action = Action;
         }
+        public RelayCommand(Action<object> Action,Func<bool> canExec)
+        {
+            this.action = Action;
+            this.canExecFunc = canExec;
+        }
 
         #region ICommand members
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            if (canExecFunc == null) return true;
+
+            return canExecFunc.Invoke();
         }
 
         public void Execute(object parameter)

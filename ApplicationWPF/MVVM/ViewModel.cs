@@ -95,8 +95,8 @@ namespace ApplicationWPF
         public ViewModel()
         {
             OpenImageCommand = new RelayCommand(new Action<object>(LoadImageFromDisc));
-            ConvertImageCommand = new RelayCommand(new Action<object>(ConvertImage));
-            SaveImageCommand = new RelayCommand(new Action<object>(SaveImageOnDisc));
+            ConvertImageCommand = new RelayCommand(new Action<object>(ConvertImage), () => { return InputImage == null? false:true; });
+            SaveImageCommand = new RelayCommand(new Action<object>(SaveImageOnDisc), () => { return OutputImage == null ? false : true; });
         }
 
         #region Methods
